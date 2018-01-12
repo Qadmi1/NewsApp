@@ -26,7 +26,7 @@ public class NewsLoader extends AsyncTaskLoader<List<NewsItem>> {
 
     @Override
     public List<NewsItem> loadInBackground() {
-        List<NewsItem> news = NetworkQueryRequest.fetchDataFromAPI(GUARDIAN_REQUEST_URL);
-        return news;
+
+        return NetworkQueryRequest.fetchDataFromAPI(GUARDIAN_REQUEST_URL);
     }
 }

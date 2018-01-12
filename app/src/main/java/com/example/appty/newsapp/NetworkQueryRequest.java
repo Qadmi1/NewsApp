@@ -27,18 +27,17 @@ public class NetworkQueryRequest {
 
 
     public static List<NewsItem> fetchDataFromAPI(String stringURL){
-        String jsonResponse = "";
-
+        String jsonResponse;
+        // Transform the url for String type to URL type by calling the createURL method
         URL url = createURL(stringURL);
 
-            jsonResponse = makeHTTPRequest(url);
+        jsonResponse = makeHTTPRequest(url);
 
-        List<NewsItem> news = extractNewsFromJson(jsonResponse);
 
-        return news;
+        return extractNewsFromJson(jsonResponse);
     }
 
-    public static URL createURL(String stringURL)
+    private static URL createURL(String stringURL)
     {
         URL url= null;
 
@@ -51,7 +50,7 @@ public class NetworkQueryRequest {
         return url;
     }
 
-    public static String makeHTTPRequest(URL url)  {
+    private static String makeHTTPRequest(URL url)  {
         String jsonResponse = "";
         InputStream inputStream;
         HttpURLConnection httpURLConnection;
@@ -75,7 +74,7 @@ public class NetworkQueryRequest {
         return jsonResponse;
     }
 
-    public static String extractJSONFromInputStream(InputStream inputStream) throws IOException {
+    private static String extractJSONFromInputStream(InputStream inputStream) throws IOException {
         StringBuilder builder = new StringBuilder();
 
         if (inputStream != null)
@@ -92,7 +91,7 @@ public class NetworkQueryRequest {
         return builder.toString();
     }
 
-    public static List<NewsItem> extractNewsFromJson(String jsonResponseString)
+    private static List<NewsItem> extractNewsFromJson(String jsonResponseString)
     {
         List<NewsItem> news = new ArrayList<>();
 
@@ -112,8 +111,7 @@ public class NetworkQueryRequest {
 
                 String webPageUrl = innerObject.getString("webUrl");
 
-                NewsItem newsItem = new NewsItem(section, articleTitle, webPageUrl);
-                news.add(newsItem);
+                news.add(new NewsItem(section, articleTitle, webPageUrl));
             }
 
         } catch (JSONException e) {
