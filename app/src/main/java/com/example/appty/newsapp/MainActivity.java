@@ -1,9 +1,13 @@
 package com.example.appty.newsapp;
 
 import android.app.LoaderManager;
+import android.content.Intent;
 import android.content.Loader;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -24,6 +28,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         ListView listView = findViewById(R.id.list_view);
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                // Find the current new item/object
+                NewsItem currentNews = adapter.getItem(i);
+
+                // Convert the String URL into a URI object
+                Uri newsUri = Uri.parse(currentNews.getUrl());
+
+                // Create explicit intent to open the news on a web page
+                Intent openWebPage = new Intent(Intent.ACTION_VIEW, newsUri);
+
+                startActivity(openWebPage);
+            }
+        });
 
         LoaderManager loaderManager = getLoaderManager();
         loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);

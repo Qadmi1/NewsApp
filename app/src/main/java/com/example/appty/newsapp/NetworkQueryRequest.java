@@ -110,7 +110,9 @@ public class NetworkQueryRequest {
 
                 String articleTitle = innerObject.getString("webTitle");
 
-                NewsItem newsItem = new NewsItem(section, articleTitle);
+                String webPageUrl = innerObject.getString("webUrl");
+
+                NewsItem newsItem = new NewsItem(section, articleTitle, webPageUrl);
                 news.add(newsItem);
             }
 
