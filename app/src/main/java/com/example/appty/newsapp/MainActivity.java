@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private static final String  GUARDIAN_REQUEST_URL ="http://content.guardianapis.com/search?api-key=test";
     private static final int LOADER_ID = 1;
     private TextView emptyHandler;
-
+    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,23 +57,28 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
         });
 
-        // Create a reference to the LoaderManager
-        LoaderManager loaderManager = getLoaderManager();
-
+        // Check if there is a connection
         ConnectivityManager cm =
                 (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 
+        assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
-        boolean isConnected = activeNetwork != null &&
-                activeNetwork.isConnectedOrConnecting();
 
-        if (isConnected) {
+        // Make sure there is a connection before fetching the data
+        if (activeNetwork != null && activeNetwork.isConnected()) {
+            // Create a reference to the LoaderManager
+            LoaderManager loaderManager = getLoaderManager();
             // Initialize the loader to create a new loader or use the existing one.
             loaderManager.initLoader(LOADER_ID, null, this);
         }
         else {
+
+            // Find the ProgressBar and hide it after displaying then empty handler view
+            View loadingIndicator = findViewById(R.id.loading_spinner);
+            loadingIndicator.setVisibility(View.INVISIBLE);
             // If there is no internet show a message to inform the user
             emptyHandler.setText(R.string.no_internet);
+
         }
         }
 
@@ -87,8 +93,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public void onLoadFinished(Loader<List<NewsItem>> loader, List<NewsItem> newsItemList) {
+        // First clear the adapter
         adapter.clear();
+        // if there is no items in the ListView show a message that says so.
         emptyHandler.setText(R.string.empty);
+        // Find the ProgressBar and hide it after the load is complete
+        View loadingIndicator = findViewById(R.id.loading_spinner);
+        loadingIndicator.setVisibility(View.INVISIBLE);
         // Make sure that that the passed List is not null or empty
         if (newsItemList != null && !newsItemList.isEmpty())
         adapter.addAll(newsItemList);

@@ -31,6 +31,12 @@ public class NetworkQueryRequest {
         // Transform the url for String type to URL type by calling the createURL method
         URL url = createURL(stringURL);
 
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
         jsonResponse = makeHTTPRequest(url);
 
 
