@@ -24,8 +24,6 @@ public class NewsItem {
      *
      * @param section is the magnitude (size) of the earthquake
      * @param articleTitle is the location where the earthquake happened
-//     * @param timeInMilliseconds is the time in milliseconds (from the Epoch) when the
-//     *                           earthquake happened
      * @param url is the website URL to find more details about the earthquake
      */
     public NewsItem(String section, String articleTitle, String url) {

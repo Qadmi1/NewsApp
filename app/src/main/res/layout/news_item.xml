@@ -12,6 +12,6 @@
     <TextView
         android:id="@+id/article"
         style="@style/article"
-        android:hint="gggggggggggggg"/>
+        android:hint="gggggggggggggg" />
 
 </LinearLayout>

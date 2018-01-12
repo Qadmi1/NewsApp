@@ -23,26 +23,18 @@ import java.util.List;
 
 public class NetworkQueryRequest {
 
-    private static final String LOG_TAG = NetworkQueryRequest.class.getName();
 
-
+    // This method fetches the data from the API and return a List containing the desired data.
     public static List<NewsItem> fetchDataFromAPI(String stringURL){
         String jsonResponse;
-        // Transform the url for String type to URL type by calling the createURL method
         URL url = createURL(stringURL);
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         jsonResponse = makeHTTPRequest(url);
 
 
         return extractNewsFromJson(jsonResponse);
     }
-
+    // This method transform the passed URL from String object type to URL.
     private static URL createURL(String stringURL)
     {
         URL url= null;
@@ -50,12 +42,11 @@ public class NetworkQueryRequest {
         try {
             url = new URL(stringURL);
         } catch (MalformedURLException e) {
-            Log.e(LOG_TAG, "MalformedURLException");
             e.printStackTrace();
         }
         return url;
     }
-
+    // This method takes a URL and return a JSon Response in String object type.
     private static String makeHTTPRequest(URL url)  {
         String jsonResponse = "";
         InputStream inputStream;
@@ -79,7 +70,7 @@ public class NetworkQueryRequest {
 
         return jsonResponse;
     }
-
+    // This method takes the Response as InputStream and transform it into String.
     private static String extractJSONFromInputStream(InputStream inputStream) throws IOException {
         StringBuilder builder = new StringBuilder();
 
@@ -97,6 +88,8 @@ public class NetworkQueryRequest {
         return builder.toString();
     }
 
+    // This method takes the JsonResponse as String and extract the desired data and add it to a
+    // List of NewsItem type
     private static List<NewsItem> extractNewsFromJson(String jsonResponseString)
     {
         List<NewsItem> news = new ArrayList<>();
