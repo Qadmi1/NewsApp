@@ -9,16 +9,24 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.util.List;
+
 /**
  * Created by appty on 10/01/18.
  */
 
 public class NewsAdapter extends ArrayAdapter<NewsItem> {
 
-
-    public NewsAdapter(@NonNull Context context, int resource) {
-        super(context, resource);
+    /**
+     * Constructs a new {@link NewsAdapter}.
+     *
+     * @param context     of the app
+     * @param newsItemList is the list of earthquakes, which is the data source of the adapter
+     */
+    public NewsAdapter(@NonNull Context context, List<NewsItem> newsItemList) {
+        super(context, 0, newsItemList );
     }
+
 
     @NonNull
     @Override
