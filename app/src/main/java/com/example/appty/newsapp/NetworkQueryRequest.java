@@ -31,11 +31,7 @@ public class NetworkQueryRequest {
 
         URL url = createURL(stringURL);
 
-        try {
             jsonResponse = makeHTTPRequest(url);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
         List<NewsItem> news = extractNewsFromJson(jsonResponse);
 
@@ -55,22 +51,27 @@ public class NetworkQueryRequest {
         return url;
     }
 
-    public static String makeHTTPRequest(URL url) throws IOException {
+    public static String makeHTTPRequest(URL url)  {
         String jsonResponse = "";
         InputStream inputStream;
         HttpURLConnection httpURLConnection;
 
-        httpURLConnection = (HttpURLConnection) url.openConnection();
-        httpURLConnection.setConnectTimeout(15000);
-        httpURLConnection.setReadTimeout(10000);
-        httpURLConnection.setRequestMethod("GET");
-        httpURLConnection.connect();
+        try {
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setConnectTimeout(15000);
+            httpURLConnection.setReadTimeout(10000);
+            httpURLConnection.setRequestMethod("GET");
+            httpURLConnection.connect();
 
-        if (httpURLConnection.getResponseCode() == 200)
-        {
-            inputStream = httpURLConnection.getInputStream();
-            jsonResponse = extractJSONFromInputStream(inputStream);
+            if (httpURLConnection.getResponseCode() == 200)
+            {
+                inputStream = httpURLConnection.getInputStream();
+                jsonResponse = extractJSONFromInputStream(inputStream);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
         return jsonResponse;
     }
 
@@ -98,7 +99,7 @@ public class NetworkQueryRequest {
         try {
             JSONObject baseObject = new JSONObject(jsonResponseString);
 
-            JSONObject response = baseObject.getJSONObject("response");
+                JSONObject response = baseObject.getJSONObject("response");
 
             JSONArray results = response.getJSONArray("results");
             for (int i = 0; i<results.length(); i++)

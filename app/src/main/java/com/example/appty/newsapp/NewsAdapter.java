@@ -23,7 +23,7 @@ public class NewsAdapter extends ArrayAdapter<NewsItem> {
      * @param context     of the app
      * @param newsItemList is the list of earthquakes, which is the data source of the adapter
      */
-    public NewsAdapter(@NonNull Context context, List<NewsItem> newsItemList) {
+    public NewsAdapter( Context context, List<NewsItem> newsItemList) {
         super(context, 0, newsItemList );
     }
 
@@ -50,10 +50,10 @@ public class NewsAdapter extends ArrayAdapter<NewsItem> {
         section.setText(currentNewsItem.getSection());
 
         // Find the article title and display it.
-        TextView articleTitle = newsItemView.findViewById(R.id.title);
+        TextView articleTitle = newsItemView.findViewById(R.id.article);
         articleTitle.setText(currentNewsItem.getArticleTitle());
 
 
-        return super.getView(position, convertView, parent);
+        return newsItemView;
     }
 }

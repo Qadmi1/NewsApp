@@ -1,13 +1,15 @@
 package com.example.appty.newsapp;
 
+import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.support.v4.content.AsyncTaskLoader;
+
+import java.util.List;
 
 /**
  * Created by appty on 12/01/18.
  */
 
-public class NewsLoader extends android.content.AsyncTaskLoader<NewsItem> {
+public class NewsLoader extends AsyncTaskLoader<List<NewsItem>> {
 
     private String GUARDIAN_REQUEST_URL;
 
@@ -18,11 +20,13 @@ public class NewsLoader extends android.content.AsyncTaskLoader<NewsItem> {
 
     @Override
     protected void onStartLoading() {
-        onForceLoad();
+        forceLoad();
     }
 
+
     @Override
-    public NewsItem loadInBackground() {
-        return null;
+    public List<NewsItem> loadInBackground() {
+        List<NewsItem> news = NetworkQueryRequest.fetchDataFromAPI(GUARDIAN_REQUEST_URL);
+        return news;
     }
 }
