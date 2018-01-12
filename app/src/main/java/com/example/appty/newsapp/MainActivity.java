@@ -11,6 +11,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsItem>> {
 
+    private String GUARDIAN_REQUEST_URL;
     private NewsAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         LoaderManager loaderManager = getLoaderManager();
         loaderManager.initLoader(0, null, this);
     }
-    
+
 
     @Override
     public Loader<List<NewsItem>> onCreateLoader(int i, Bundle bundle) {
