@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">NewsApp</string>
+
+    <string name="empty"> We can\'t find any news currently!</string>
+
+    <string name="no_internet">Please check your internet connection.</string>
 </resources>
