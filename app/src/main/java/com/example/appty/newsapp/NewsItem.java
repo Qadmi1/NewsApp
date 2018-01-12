@@ -5,9 +5,9 @@ package com.example.appty.newsapp;
  */
 
 /**
- * An {@link NewsPage} object contains information related to a single NewsPage.
+ * An {@link NewsItem} object contains information related to a single NewsItem.
  */
-public class NewsPage {
+public class NewsItem {
 
     /** The section of the news page */
     private String section;
@@ -15,7 +15,7 @@ public class NewsPage {
     private String articleTitle;
 
     /**
-     * Constructs a new {@link NewsPage} object.
+     * Constructs a new {@link NewsItem} object.
      *
      * @param section is the magnitude (size) of the earthquake
      * @param articleTitle is the location where the earthquake happened
@@ -23,7 +23,7 @@ public class NewsPage {
 //     *                           earthquake happened
 //     * @param url is the website URL to find more details about the earthquake
      */
-    public NewsPage(String section, String articleTitle) {
+    public NewsItem(String section, String articleTitle) {
         this.section = section;
         this.articleTitle = articleTitle;
     }
