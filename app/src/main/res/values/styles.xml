@@ -20,7 +20,7 @@
     </style>
 
     <!-- Style for the article View. -->
-    <style name="article">
+    <style name="article_author">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">?android:textAppearanceSmall</item>

@@ -45,6 +45,8 @@ public class NewsAdapter extends ArrayAdapter<NewsItem> {
         // Find the current NewsItem.
         NewsItem currentNewsItem = getItem(position);
 
+        assert currentNewsItem != null;
+
         // Find the section and display it.
         TextView section = newsItemView.findViewById(R.id.section);
         section.setText(currentNewsItem.getSection());
@@ -53,6 +55,9 @@ public class NewsAdapter extends ArrayAdapter<NewsItem> {
         TextView articleTitle = newsItemView.findViewById(R.id.article);
         articleTitle.setText(currentNewsItem.getArticleTitle());
 
+        // Find the author of the news and display him/her.
+        TextView authorName = newsItemView.findViewById(R.id.author);
+        authorName.setText(currentNewsItem.getAuthorName());
 
         return newsItemView;
     }

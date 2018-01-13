@@ -110,7 +110,13 @@ public class NetworkQueryRequest {
 
                 String webPageUrl = innerObject.getString("webUrl");
 
-                news.add(new NewsItem(section, articleTitle, webPageUrl));
+                JSONArray tags = innerObject.getJSONArray("tags");
+
+                JSONObject tagsInnerObject = tags.getJSONObject(0);
+
+                String authorName = tagsInnerObject.getString("webTitle");
+
+                news.add(new NewsItem(section, articleTitle, webPageUrl, authorName));
             }
 
         } catch (JSONException e) {

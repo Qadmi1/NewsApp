@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -21,10 +20,9 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsItem>> {
 
     private NewsAdapter adapter;
-    private static final String  GUARDIAN_REQUEST_URL ="http://content.guardianapis.com/search?api-key=test";
+    private static final String  GUARDIAN_REQUEST_URL ="http://content.guardianapis.com/search?api-key=test&show-tags=contributor";
     private static final int LOADER_ID = 1;
     private TextView emptyHandler;
-    private ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
