@@ -13,16 +13,16 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsItem>> {
 
     private NewsAdapter adapter;
-    private static final String  GUARDIAN_REQUEST_URL ="http://content.guardianapis.com/search?api-key=test&show-tags=contributor";
+    private static final String GUARDIAN_REQUEST_URL = "http://content.guardianapis.com/search?api-key=test&show-tags=contributor";
     private static final int LOADER_ID = 1;
     private TextView emptyHandler;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,8 +37,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         emptyHandler = findViewById(R.id.empty_handler);
         // Set the empty view for the ListView to be emptyHandler TextView
         listView.setEmptyView(emptyHandler);
-            // Create an onItemClickListener for the ListView
-            listView.setOnItemClickListener(new ListView.OnItemClickListener() {
+        // Create an onItemClickListener for the ListView
+        listView.setOnItemClickListener(new ListView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // Find the current new item/object
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // Check if there is a connection
         ConnectivityManager cm =
-                (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
         assert cm != null;
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
@@ -68,8 +68,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             LoaderManager loaderManager = getLoaderManager();
             // Initialize the loader to create a new loader or use the existing one.
             loaderManager.initLoader(LOADER_ID, null, this);
-        }
-        else {
+        } else {
 
             // Find the ProgressBar and hide it after displaying then empty handler view
             View loadingIndicator = findViewById(R.id.loading_spinner);
@@ -78,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             emptyHandler.setText(R.string.no_internet);
 
         }
-        }
+    }
 
 
     @Override
@@ -100,7 +99,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         loadingIndicator.setVisibility(View.INVISIBLE);
         // Make sure that that the passed List is not null or empty
         if (newsItemList != null && !newsItemList.isEmpty())
-        adapter.addAll(newsItemList);
+            adapter.addAll(newsItemList);
     }
 
     @Override

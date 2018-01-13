@@ -22,10 +22,14 @@ import java.util.List;
  */
 
 public class NetworkQueryRequest {
+    // The connect timeout for the http request
+    private static final int CONNECT_TIMEOUT = 15000;
 
+    // The read timeout for the http request
+    private static final int READ_TIMEOUT = 10000;
 
     // This method fetches the data from the API and return a List containing the desired data.
-    public static List<NewsItem> fetchDataFromAPI(String stringURL){
+    public static List<NewsItem> fetchDataFromAPI(String stringURL) {
         String jsonResponse;
         URL url = createURL(stringURL);
 
@@ -34,10 +38,10 @@ public class NetworkQueryRequest {
 
         return extractNewsFromJson(jsonResponse);
     }
+
     // This method transform the passed URL from String object type to URL.
-    private static URL createURL(String stringURL)
-    {
-        URL url= null;
+    private static URL createURL(String stringURL) {
+        URL url = null;
 
         try {
             url = new URL(stringURL);
@@ -46,21 +50,21 @@ public class NetworkQueryRequest {
         }
         return url;
     }
+
     // This method takes a URL and return a JSon Response in String object type.
-    private static String makeHTTPRequest(URL url)  {
+    private static String makeHTTPRequest(URL url) {
         String jsonResponse = "";
         InputStream inputStream;
         HttpURLConnection httpURLConnection;
 
         try {
             httpURLConnection = (HttpURLConnection) url.openConnection();
-            httpURLConnection.setConnectTimeout(15000);
-            httpURLConnection.setReadTimeout(10000);
+            httpURLConnection.setConnectTimeout(CONNECT_TIMEOUT);
+            httpURLConnection.setReadTimeout(READ_TIMEOUT);
             httpURLConnection.setRequestMethod("GET");
             httpURLConnection.connect();
 
-            if (httpURLConnection.getResponseCode() == 200)
-            {
+            if (httpURLConnection.getResponseCode() == 200) {
                 inputStream = httpURLConnection.getInputStream();
                 jsonResponse = extractJSONFromInputStream(inputStream);
             }
@@ -70,17 +74,16 @@ public class NetworkQueryRequest {
 
         return jsonResponse;
     }
+
     // This method takes the Response as InputStream and transform it into String.
     private static String extractJSONFromInputStream(InputStream inputStream) throws IOException {
         StringBuilder builder = new StringBuilder();
 
-        if (inputStream != null)
-        {
+        if (inputStream != null) {
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String line = bufferedReader.readLine();
-            while (line != null)
-            {
+            while (line != null) {
                 builder.append(line);
                 line = bufferedReader.readLine();
             }
@@ -90,18 +93,16 @@ public class NetworkQueryRequest {
 
     // This method takes the JsonResponse as String and extract the desired data and add it to a
     // List of NewsItem type
-    private static List<NewsItem> extractNewsFromJson(String jsonResponseString)
-    {
+    private static List<NewsItem> extractNewsFromJson(String jsonResponseString) {
         List<NewsItem> news = new ArrayList<>();
 
         try {
             JSONObject baseObject = new JSONObject(jsonResponseString);
 
-                JSONObject response = baseObject.getJSONObject("response");
+            JSONObject response = baseObject.getJSONObject("response");
 
             JSONArray results = response.getJSONArray("results");
-            for (int i = 0; i<results.length(); i++)
-            {
+            for (int i = 0; i < results.length(); i++) {
                 JSONObject innerObject = results.getJSONObject(i);
 
                 String section = innerObject.getString("sectionName");

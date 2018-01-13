@@ -9,28 +9,34 @@ package com.example.appty.newsapp;
  */
 public class NewsItem {
 
-    /** The section of the news page */
+    /**
+     * The section of the news page
+     */
     private String section;
 
-    /** The articleTitle of the news page */
+    /**
+     * The articleTitle of the news page
+     */
     private String articleTitle;
 
-    /** The URL of the news page */
+    /**
+     * The URL of the news page
+     */
     private String url;
 
-    /** The name of the author of the news page */
+    /**
+     * The name of the author of the news page
+     */
     private String authorName;
-
-
 
 
     /**
      * Constructs a new {@link NewsItem} object.
      *
-     * @param section is the magnitude (size) of the earthquake
+     * @param section      is the magnitude (size) of the earthquake
      * @param articleTitle is the location where the earthquake happened
-     * @param url is the website URL to find more details about the earthquake
-     * @param authorName is the website URL to find more details about the earthquake
+     * @param url          is the website URL to find more details about the earthquake
+     * @param authorName   is the website URL to find more details about the earthquake
      */
     public NewsItem(String section, String articleTitle, String url, String authorName) {
         this.section = section;
@@ -39,22 +45,30 @@ public class NewsItem {
         this.authorName = authorName;
     }
 
-    /** Getter for the section */
+    /**
+     * Getter for the section
+     */
     public String getSection() {
         return section;
     }
 
-    /** Getter for the articleTitle */
+    /**
+     * Getter for the articleTitle
+     */
     public String getArticleTitle() {
         return articleTitle;
     }
 
-    /** Getter for the web page is url */
+    /**
+     * Getter for the web page is url
+     */
     public String getUrl() {
         return url;
     }
 
-    /** Getter for the web page is url */
+    /**
+     * Getter for the web page is url
+     */
     public String getAuthorName() {
         return authorName;
     }
