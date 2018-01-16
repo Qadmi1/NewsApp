@@ -4,11 +4,16 @@
 
 
     <ListPreference
-        android:defaultValue="@string/settings_section_default"
-        android:entries="@array/settings_sections"
+        android:defaultValue="@string/settings_section_sport_default"
+        android:entries="@array/label_sections"
         android:entryValues="@array/settings_sections"
         android:key="@string/section_key"
         android:title="@string/choose_section" />
 
-
+    <ListPreference
+        android:defaultValue="@string/settings_order_by_newest_default"
+        android:entries="@array/label_order_by"
+        android:entryValues="@array/settings_order_by"
+        android:key="@string/order_by_key"
+        android:title="@string/choose_order" />
 </PreferenceScreen>

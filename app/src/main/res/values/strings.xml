@@ -5,9 +5,14 @@
 
     <string name="no_internet">Please check your internet connection.</string>
     
-    <string name="settings_section_default">sport</string>
+    <string name="settings_section_sport_default">sport</string>
+
+    <string name="label_section_sport_default">Sport</string>
 
     <string name="settings_section_football">football</string>
+
+    <string name="label_section_football">Football</string>
+
 
     <string name="section_key">section</string>
 
@@ -17,13 +22,18 @@
 
     <string name="preference">Preferences</string>
 
-    <string name="settings_order_by_default">newest</string>
+    <string name="settings_order_by_newest_default">newest</string>
+
+    <string name="label_order_by_newest_default">Newest</string>
 
     <string name="settings_order_by_relevance">relevance</string>
+
+    <string name="label_order_by_relevance">Relevance</string>
 
     <string name="order_by_key">Order</string>
 
     <string name="choose_order">Order-By</string>
+
 
 
 

@@ -93,11 +93,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String section = sharedPrefs.getString(
                 getString(R.string.section_key),
-                getString(R.string.settings_section_default));
+                getString(R.string.settings_section_sport_default));
 
         String orderBy = sharedPrefs.getString(
                 getString(R.string.order_by_key),
-                getString(R.string.settings_order_by_default));
+                getString(R.string.settings_order_by_newest_default));
 
 
         Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
@@ -106,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         uriBuilder.appendQueryParameter("section", section);
         uriBuilder.appendQueryParameter("api-key", "test");
         uriBuilder.appendQueryParameter("show-tags", "contributor");
+        uriBuilder.appendQueryParameter("order-by", orderBy);
 
         return new NewsLoader(this, uriBuilder.toString());
     }
