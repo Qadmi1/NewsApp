@@ -18,7 +18,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".NewsPreference"
+            android:name=".SettingsActivity"
             android:label="@string/preference">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

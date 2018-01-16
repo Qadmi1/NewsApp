@@ -23,9 +23,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<NewsItem>> {
 
     private NewsAdapter adapter;
-    private static final String GUARDIAN_REQUEST_URL =
-            "http://content.guardianapis.com/search";
-            //http://content.guardianapis.com/search?section=football&api-key=test&show-tags=contributor
+    private static final String GUARDIAN_REQUEST_URL = "http://content.guardianapis.com/search";
     private static final int LOADER_ID = 1;
     private TextView emptyHandler;
 
@@ -140,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_settings) {
-            Intent settingsIntent = new Intent(this, NewsPreference.class);
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
             startActivity(settingsIntent);
             return true;
         }
