@@ -29,20 +29,28 @@ public class NewsItem {
      */
     private String authorName;
 
+    /**
+     * The date of the news
+     */
+    private String date;
+
 
     /**
      * Constructs a new {@link NewsItem} object.
      *
-     * @param section      is the magnitude (size) of the earthquake
-     * @param articleTitle is the location where the earthquake happened
-     * @param url          is the website URL to find more details about the earthquake
-     * @param authorName   is the website URL to find more details about the earthquake
+     * @param section      is the section of the news.
+     * @param articleTitle is the title of the article.
+     * @param url          is the website URL to find more details about the news.
+     * @param authorName   is the name of the author who created the article/news.
+     * @param date         is the date of the news.
      */
-    public NewsItem(String section, String articleTitle, String url, String authorName) {
+    public NewsItem(String section, String articleTitle, String url, String authorName,
+                    String date) {
         this.section = section;
         this.articleTitle = articleTitle;
         this.url = url;
         this.authorName = authorName;
+        this.date = date;
     }
 
     /**
@@ -71,5 +79,12 @@ public class NewsItem {
      */
     public String getAuthorName() {
         return authorName;
+    }
+
+    /**
+     * Getter for the web page is url
+     */
+    public String getDate() {
+        return date;
     }
 }

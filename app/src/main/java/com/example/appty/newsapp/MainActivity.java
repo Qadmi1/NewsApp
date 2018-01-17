@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,6 +87,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
     @Override
     public Loader<List<NewsItem>> onCreateLoader(int i, Bundle bundle) {
+        // This empty String will be passed to the loader if there is no connection.
+        String noConnection = "";
         // Create an anonymous object of our custom Loader that would make the network
         // request on a background thread and return it in a List of NewsItem object type
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -97,7 +100,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 getString(R.string.order_by_key),
                 getString(R.string.settings_order_by_newest_default));
 
-
         Uri baseUri = Uri.parse(GUARDIAN_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
@@ -105,8 +107,28 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         uriBuilder.appendQueryParameter("api-key", "test");
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("order-by", orderBy);
+        // Check if there is a connection
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        return new NewsLoader(this, uriBuilder.toString());
+        assert cm != null;
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+
+        // Make sure there is a connection before fetching the data
+        if (activeNetwork != null && activeNetwork.isConnected()) {
+            // Of there is connection pass the desired URL request(Desired end point).
+            return new NewsLoader(this, uriBuilder.toString());
+
+        } else {
+
+            // Find the ProgressBar and hide it after displaying then empty handler view
+            View loadingIndicator = findViewById(R.id.loading_spinner);
+            loadingIndicator.setVisibility(View.INVISIBLE);
+            // If there is no internet show a message to inform the user
+            emptyHandler.setText(R.string.no_internet);
+            // if there is no connection pass empty url(String).
+            return new NewsLoader(this, noConnection);
+        }
     }
 
     @Override
